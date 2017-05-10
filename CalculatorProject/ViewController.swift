@@ -11,21 +11,45 @@ import UIKit
 class ViewController: UIViewController {
 
     var numberOnLabel: Double = 0
-    var numberOnScreen: Double = 0
+    var numbersOnScreen: Double = 0
     
     
     @IBOutlet weak var printOutLabel: UILabel!
     
     
-    
-    /// I think only the 6 button was attached to this IBAction
     @IBAction func numbers(_ sender: UIButton) {
-        // label.text will be updated to the labels text and the buttons tag value minus one
-       printOutLabel.text = String(sender.tag-1)
         
-        numberOnScreen = Double(printOutLabel.text!)!
-        // fatal error (when I press 6, when i press any other button nothing happens, text does not change)
+        printOutLabel.text = String(sender.tag-1)
+        numbersOnScreen = Double(printOutLabel.text!)!
         
+        //  Fatal Error : printOutLabel.text = printOutLabel.text! + String(sender.tag-1)
+            // "fatal error: unexpectedly found nil while unwrapping an Optional value"
+        
+        
+        // when I added "Label.text! +" numbersOnScreen returned a fatal error
+        // everything worked fine until I added "Label.text! +", although I could only display the number being pressed on the screen with no additional numbers
+    }
+    
+    
+   
+    @IBAction func operators(_ sender: UIButton) {
+        printOutLabel.text = printOutLabel.text! + String(sender.tag-1)
+        
+        if sender.tag == 15 { // division
+            printOutLabel.text = "/"
+        }
+        else if sender.tag == 16 { // multiplication
+            printOutLabel.text = "X"
+        }
+        else if sender.tag == 17 { // minus
+            printOutLabel.text = "-"
+        }
+        else if sender.tag == 18 { //addition
+            printOutLabel.text = "+"
+        }
+        else if sender.tag == 19 { // equals
+            printOutLabel.text = "="
+        }
     }
     
     
